@@ -1,12 +1,14 @@
 import React from 'react'
 import Header from './components/Header';
-import Todo from './components/Todo';
+import TodoList from './components/TodoList';
+import {todos} from './data/todos';
+// import Todo from './components/Todo';
 
 function App() {
   return (
     <div>
       <Header />
-      <Todo task="Learn React" deadline="12-02-2020" status={false} />
+      <TodoList todos={todos} />
     </div>
   );
 }
