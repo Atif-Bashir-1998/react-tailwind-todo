@@ -4,10 +4,10 @@ export default function Todo(props) {
   const {task, deadline, status} = props
 	
   return (
-    <div className='bg-gray-50 flex p-4 rounded-md'>
-			<h1>{task}</h1>
+    <div className='bg-gray-50 p-4 rounded-md flex items-center justify-between'>
+			<h1 className='font-bold'>{task}</h1>
 			<small>{deadline}</small>
-			<p>{status ? 'Completed' : 'Pending'}</p>
+			<small>{status ? 'Completed' : 'Pending'}</small>
 		</div>
   )
 }
