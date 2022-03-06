@@ -18,6 +18,10 @@ export default function TodoForm({addTodo}) {
 	const handleSubmit = (e) => {
 		e.preventDefault()
 		addTodo(newTodo)
+		setNewTodo({
+			task: '',
+			deadline: ''
+		})
 	}
 
 	const canAddTodo = newTodo.task && newTodo.deadline
