@@ -16,6 +16,14 @@ const reducer = (todos, action) => {
     case ACTIONS.ADD_TODO:
       console.log(action.payload.todo)
       return [...todos, action.payload.todo]
+    
+    case ACTIONS.TOGGLE_TODO:
+      return todos.map((todo) =>{
+        if (todo.id === action.payload.id){
+          return {...todo, completed: !todo.completed}
+        }
+        return todo
+      })
     default:
       break;
   }
@@ -23,8 +31,12 @@ const reducer = (todos, action) => {
 
 function App() {
   const addTodo = (todo) => {
-    todo = {...todo, id: +new Date()}
+    todo = {...todo, id: +new Date(), completed: false}
     dispatch({type: ACTIONS.ADD_TODO, payload: {todo}})
+  }
+
+  const toggleTodo = (id) => {
+    dispatch({type: ACTIONS.TOGGLE_TODO, payload: {id}})
   }
 
   const [todos, dispatch] = useReducer(reducer, [])
@@ -33,7 +45,7 @@ function App() {
     <div>
       <Header />
       <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} toggleTodo={toggleTodo} />
     </div>
   );
 }
