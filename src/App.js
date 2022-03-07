@@ -7,7 +7,7 @@ import TodoForm from './components/TodoForm';
 
 const ACTIONS = {
   ADD_TODO: 'add-todo',
-  REMOVE_TODO: 'remove-todo',
+  DELETE_TODO: 'delete-todo',
   TOGGLE_TODO: 'toggle-todo'
 }
 
@@ -24,6 +24,9 @@ const reducer = (todos, action) => {
         }
         return todo
       })
+
+    case ACTIONS.DELETE_TODO:
+      return todos.filter((todo) => todo.id !== action.payload.id)
     default:
       break;
   }
@@ -39,13 +42,17 @@ function App() {
     dispatch({type: ACTIONS.TOGGLE_TODO, payload: {id}})
   }
 
+  const deleteTodo = (id) => {
+    dispatch({type: ACTIONS.DELETE_TODO, payload: {id}})
+  }
+
   const [todos, dispatch] = useReducer(reducer, [])
   
   return (
     <div>
       <Header />
       <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} toggleTodo={toggleTodo} />
+      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
     </div>
   );
 }
