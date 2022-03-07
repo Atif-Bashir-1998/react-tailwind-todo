@@ -23,7 +23,7 @@ const reducer = (todos, action) => {
 
 function App() {
   const addTodo = (todo) => {
-    todo = {...todo, id: +new Date()}
+    todo = {...todo, id: +new Date(), completed: false}
     dispatch({type: ACTIONS.ADD_TODO, payload: {todo}})
   }
 
